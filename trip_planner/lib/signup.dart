@@ -17,6 +17,7 @@ class _SignUpState extends State<SignUp> {
   final _firebaseAuth = FirebaseAuth.instance;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +62,23 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () async {
                   await firebaseSignUp(context);
                 },
-                child: const Text('Sign Up'),
+                child: isLoading
+                      ? const SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator(
+                              strokeWidth: 3, color: Colors.white),
+                      ) : const Text('Sign Up'),
               )
             ],
           ),
@@ -77,12 +91,18 @@ class _SignUpState extends State<SignUp> {
 Future<void> firebaseSignUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       String message = '';
+      setState(() {
+        isLoading = true;
+      }); 
       try {
-        await _firebaseAuth.createUserWithEmailAndPassword( // instantiated earlier on: final _firebaseAuth = FirebaseAuth.instance;
+        await _firebaseAuth.createUserWithEmailAndPassword( // instantiated earlier on: final _firebaseAuth = FirebaseAuth.instance
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
         Future.delayed(const Duration(seconds: 3), () {
+          setState(() {
+            isLoading = false;
+          });
           if(mounted) {
             Navigator.of(context, rootNavigator: true).push(
               MaterialPageRoute(
@@ -92,6 +112,9 @@ Future<void> firebaseSignUp(BuildContext context) async {
           }
         });
       } on FirebaseAuthException catch (e) {
+          setState(() {
+            isLoading = false;
+          });
           if (e.code == 'weak-password') {
             message = 'The password provided is too weak.';
           } else if (e.code == 'email-already-in-use') {
@@ -106,6 +129,9 @@ Future<void> firebaseSignUp(BuildContext context) async {
             fontSize: 14.0,
           );
         } catch (e) {
+          setState(() {
+            isLoading = false;
+          });
           Fluttertoast.showToast(
             msg: "Failed: $e",
             toastLength: Toast.LENGTH_LONG,

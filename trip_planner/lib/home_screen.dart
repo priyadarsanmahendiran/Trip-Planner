@@ -31,50 +31,51 @@ class _HomeScreenState extends State<HomeScreen>{
   Widget build(BuildContext context) {
     return Scaffold( 
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Colors.black,
+        title: Text(widget.title, style: const TextStyle(color: Colors.white)),
       ),
-      body: const Row(
+      body: const Column(
         children: [
-      Column(
-        children: [
-          Expanded(
-              child: Text(
-            "Your Upcoming Trips",
-          )),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  child: Text("Trip1"),
-                )
-              ],
+          SizedBox.expand(
+            child: Card(
+              margin: EdgeInsets.zero,
+              child: Column(
+                children: [
+                  Text(
+                    "Your Upcoming Trips",
+                    style: TextStyle(
+                      fontFamily: 'Bogle',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text("Trip1"),
+                  Text("Trip2"),
+                  Text("Trip3"),
+                ],
+              ),
             ),
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  child: Text("Trip2"),
-                )
-              ],
+          SizedBox.expand(
+            child: Card(
+              margin: EdgeInsets.zero,
+              child: Column(
+                children: [
+                  Text(
+                    "Your Previous Expenses",
+                    style: TextStyle(
+                      fontFamily: 'Bogle',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
-      ),
-      Column(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Text("Your Previous expenses") //TODO: Add expense graph
-              ],
-            )
-          )
-        ],
-      )]
       ),
       bottomNavigationBar: NavBar(currentIndex: _currentIndex, onTabSelected: _onTabSelected,),
     );

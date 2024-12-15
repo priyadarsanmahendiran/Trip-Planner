@@ -63,6 +63,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/login-background.jpg
+    - assets/images/mountain_bg.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -91,7 +92,8 @@ flutter:
   # see https://flutter.dev/to/font-from-package
 
 
-fonts:
-  - family: 'Bogle'
-    fonts:
-      - asset: assets/bogle/BOGLEBLACK.OTF
+  fonts:
+    - family: 'Bogle'
+      fonts:
+        - asset: assets/bogle/BOGLEREGULAR.OTF
+          weight: 300
