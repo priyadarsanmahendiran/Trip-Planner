@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82640648476",
+    "project_id": "plan-it-624f3",
+    "storage_bucket": "plan-it-624f3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82640648476:android:22d837672f1632f926a2d9",
+        "android_client_info": {
+          "package_name": "com.example.trip_planner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxGFpRTilYZenMGWkanGxVOjUB9cf1cuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
