@@ -2,8 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:trip_planner/signup.dart';
 import 'package:trip_planner/login.dart';
 
-class Home extends StatelessWidget {
+
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with TickerProviderStateMixin {
+
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    _controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,19 +39,25 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 60.0, 20.0, 0.0),
               child: SizedBox(
                 width: 300,
-                child: Text(
-                  "Ready,\nSet, Go!",
-                  style: TextStyle(
-                    fontFamily: 'Bogle',
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, -0.2),
+                    end: Offset.zero,
+                  ).animate(_controller),
+                  child: const Text(
+                    "Ready,\nSet, Go!",
+                    style: TextStyle(
+                      fontFamily: 'Bogle',
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
+                )
               ),
             ),
             Row(
@@ -40,7 +65,7 @@ class Home extends StatelessWidget {
               children: [
                 Container(
                   width: 300,
-                  padding: const EdgeInsets.only(top: 500, right: 30, left: 20),
+                  padding: const EdgeInsets.only(top: 400, right: 30, left: 20),
                   child: Column(
                     children: [
                       TextButton(
